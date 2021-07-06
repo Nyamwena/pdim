@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">pdim</string>
+    <string name="scan_item">Scan Item</string>
+    <string name="scan_items_to_get_more_information">Scan Items to get more information</string>
+    <string name="get_a_list_of_products_in_stock">Get a List of products in stock</string>
+    <string name="product_catelogue">Product Catelogue</string>
+    <string name="exit">Exit</string>
+    <string name="close_the_application">Close The Application</string>
+    <string name="scan_clothes">Scan Clothes</string>
+
+    <string name="take_photo">TAKE PHOTO</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="permission_message">You must grant permission to access camera and external storage to run this application.</string>
+    <string name="permission_warning">All permissions are required.</string>
+
+    <string name="scan_clothes_to_get_the_colour">Scan clothes to get the colour</string>
+    <string name="code_reader">Code Reader</string>
+    <string name="title_activity_product_catelogue">ProductCatelogue</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="product_items">Product Items</string>
+    <string name="color_name">Color Name</string>
+    <string name="you_must_grant_permission_to_access_camera_and_external_storage_to_run_this_application">You must grant permission to access camera and external storage to run this application.</string>
+</resources>
