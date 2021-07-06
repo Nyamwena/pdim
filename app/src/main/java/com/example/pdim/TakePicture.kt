@@ -5,6 +5,7 @@ import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.hardware.Camera
 import android.os.Build
 import android.os.Bundle
@@ -22,19 +23,20 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
-import kotlinx.android.synthetic.main.activity_take_picture.*
 
+@Suppress("DEPRECATION")
 class TakePicture : AppCompatActivity(), SurfaceHolder.Callback, Camera.PictureCallback {
     private var surfaceHolder: SurfaceHolder? = null
     private var camera: Camera? = null
 
     private var surfaceView: SurfaceView? = null
 
+
     private val neededPermissions = arrayOf(CAMERA, WRITE_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_take_picture)
 
         surfaceView = findViewById(R.id.surfaceView)
         val result = checkPermission()
@@ -177,7 +179,10 @@ class TakePicture : AppCompatActivity(), SurfaceHolder.Callback, Camera.PictureC
     }
 
     override fun onPictureTaken(bytes: ByteArray, camera: Camera) {
+
         saveImage(bytes)
+        val options = BitmapFactory.Options()
+      //  mBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options)
         resetCamera()
     }
 
@@ -187,11 +192,13 @@ class TakePicture : AppCompatActivity(), SurfaceHolder.Callback, Camera.PictureC
         try {
             val fileName = "PDIM_" + System.currentTimeMillis() + ".jpg"
             val file = File(Environment.getExternalStorageDirectory(), fileName)
+            val baseDir = Environment.getExternalStorageDirectory().absolutePath
+            val filePath = baseDir + File.separator + fileName
             outStream = FileOutputStream(file)
             outStream.write(bytes)
             outStream.close()
             val intent = Intent(applicationContext, ProductsOcr::class.java)
-            intent.putExtra("IMAGE_URI", fileName )
+            intent.putExtra("IMAGE_URI", filePath )
             startActivity(intent)
             finish()
            // Toast.makeText(this@MainActivity, "Picture Saved: $fileName", Toast.LENGTH_LONG).show()

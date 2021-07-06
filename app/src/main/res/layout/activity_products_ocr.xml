@@ -39,23 +39,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/path_et"
-            android:clickable="false"
-            android:focusable="false"
-            android:hint="Path"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp" />
+
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            android:text="Open" />
+            android:layout_marginRight="8dp"
+            android:text="Go to Home Screen" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="Scan Another Product" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

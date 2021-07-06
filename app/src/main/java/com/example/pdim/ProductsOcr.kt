@@ -2,7 +2,6 @@ package com.example.pdim
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -12,7 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -23,25 +22,38 @@ import kotlinx.android.synthetic.main.activity_products_ocr.*
 import java.io.FileDescriptor
 import java.io.IOException
 
+
 class ProductsOcr : AppCompatActivity() {
     private var bitmap: Bitmap? = null
     private val TAG = "Productocr"
     lateinit var detect_btn: Button
     lateinit var path_select_view: Button
     lateinit var  path_et : EditText
+    private var previewImage: ImageView? = null
+    private var imageFilePath: String? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products_ocr)
+//        path_select_view.setOnClickListener {
+//            if (!checkStoragePermission()) {
+//                requestPermissions(listOf(storage_permission).toTypedArray(), 100)
+//            } else {
+//                pickImage()
+//            }
+//        }
+        val bundle = intent.extras
+        imageFilePath = bundle!!.getString("IMAGE_URI")
+        Log.d(TAG, "Image File Path:\t$imageFilePath")
+        previewImage = findViewById(R.id.text_image)
+        detect_btn = findViewById(R.id.detect_btn)
 
-        path_select_view.setOnClickListener {
-            if (!checkStoragePermission()) {
-                requestPermissions(listOf(storage_permission).toTypedArray(), 100)
-            } else {
-                pickImage()
-            }
+         bitmap = BitmapFactory.decodeFile(imageFilePath)
+        if (bitmap != null){
+            previewImage!!.setImageBitmap(bitmap)
         }
+
         val recognizer = TextRecognition.getClient()
 
         detect_btn.setOnClickListener() {
