@@ -16,12 +16,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var cardVProductCata : CardView
     lateinit var cardVProductScan : CardView
     lateinit var cardVOcr : CardView
+    private val TALKBACK_SERVICE_NAME =
+        "com.google.android.marvin.talkback/.TalkBackService"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
 //        startActivityForResult(intent, 0)
-
+      //  updateTalkBackState(true)
         cardVBarcode = findViewById(R.id.scanItem)
         textView = findViewById(R.id.contentReader)
         cardVBarcode.setOnClickListener {
@@ -51,7 +53,31 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent2)
         }
     }
+    private fun updateTalkBackState(enableTalkBack: Boolean) {
+        if (enableTalkBack) {
+            enableAccessibilityService(TALKBACK_SERVICE_NAME)
+        } else {
+            disableAccessibilityServices()
+        }
+    }
 
+    private fun enableAccessibilityService(name: String) {
+        Settings.Secure.putString(
+            contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
+            name
+        )
+        Settings.Secure.putString(contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED, "1")
+    }
+
+    private fun disableAccessibilityServices() {
+        Settings.Secure.putString(
+            contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES,
+            ""
+        )
+        Settings.Secure.putString(contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED, "0")
+    }
     override fun onActivityResult(
             requestCode: Int,
             resultCode: Int,

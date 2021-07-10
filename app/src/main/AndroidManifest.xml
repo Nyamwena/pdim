@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pdim">
 
-    <uses-sdk tools:overrideLibrary="androidx.camera.camera2" />
+
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -19,7 +19,7 @@
         android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"
         tools:ignore="ProtectedPermissions" />
     <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
+        android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
     <application

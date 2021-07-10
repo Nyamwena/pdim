@@ -51,7 +51,10 @@ class ProductsOcr : AppCompatActivity() {
 
          bitmap = BitmapFactory.decodeFile(imageFilePath)
         if (bitmap != null){
-            previewImage!!.setImageBitmap(bitmap)
+          //  previewImage!!.setImageBitmap(bitmap)
+            Glide.with(text_image)
+                .load(bitmap)
+                .into(text_image)
         }
 
         val recognizer = TextRecognition.getClient()
@@ -148,9 +151,7 @@ class ProductsOcr : AppCompatActivity() {
         const val PICK_IMAGE = 101
     }
 
-    /**
-     * credits: https://stackoverflow.com/a/21517011
-     */
+
     @Throws(IOException::class)
     private fun getBitmapFromUri(uri: Uri): Bitmap? {
         val parcelFileDescriptor = contentResolver.openFileDescriptor(uri, "r")

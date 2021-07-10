@@ -2,6 +2,7 @@ package com.example.pdim
 
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,6 +17,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.CameraInfo
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
@@ -133,7 +135,13 @@ class TakePicture : AppCompatActivity(), SurfaceHolder.Callback, Camera.PictureC
         startCamera()
     }
 
-    private fun startCamera() {
+    private fun startCamera( ) {
+       var activity : Activity? = null
+       var cameraId : Int? = null
+       var info: CameraInfo
+
+
+
         camera = Camera.open()
         camera!!.setDisplayOrientation(90)
         try {
@@ -144,6 +152,8 @@ class TakePicture : AppCompatActivity(), SurfaceHolder.Callback, Camera.PictureC
         }
 
     }
+
+
 
     override fun surfaceChanged(surfaceHolder: SurfaceHolder, i: Int, i1: Int, i2: Int) {
         resetCamera()
